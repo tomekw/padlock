@@ -30,4 +30,17 @@ package body Padlock.Contexts.Servers is
          Ctx.C_Ctx := C_Ctx;
       end return;
    end Init;
+
+   procedure Accept_Socket (Self : in out Server_Context; Child_Ctx : out Context; Socket : Sockets.Socket_Type) is
+      C_Accept_Result : C.int;
+      C_Child_Ctx : aliased Thin.TLS_Ctx_Ptr;
+   begin
+      C_Accept_Result := Thin.TLS_Accept_Socket (Self.C_Ctx, C_Child_Ctx'Access, C.int (Sockets.To_C (Socket)));
+
+      if C_Accept_Result /= 0 then
+         raise TLS_Error with C.Strings.Value (Thin.TLS_Get_Error (Self.C_Ctx));
+      end if;
+
+      Child_Ctx.C_Ctx := C_Child_Ctx;
+   end Accept_Socket;
 end Padlock.Contexts.Servers;
