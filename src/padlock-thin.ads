@@ -49,6 +49,9 @@ package Padlock.Thin is
    function TLS_Client return TLS_Ctx_Ptr
      with Import, Convention => C, External_Name => "tls_client";
 
+   function TLS_Server return TLS_Ctx_Ptr
+     with Import, Convention => C, External_Name => "tls_server";
+
    function TLS_Configure (Ctx : TLS_Ctx_Ptr; Cfg : TLS_Cfg_Ptr) return C.int
      with Import, Convention => C, External_Name => "tls_configure";
 

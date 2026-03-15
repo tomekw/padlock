@@ -1,17 +1,12 @@
 with Ada.Finalization;
 with Ada.Streams;
 
-with Padlock.Configs;
 with Padlock.Thin;
 
 package Padlock.Contexts is
    use Ada;
 
    type Context is new Finalization.Limited_Controlled with private;
-
-   function Init (Cfg : Configs.Config) return Context;
-
-   procedure Connect (Self : in out Context; Host : String; Port : String);
 
    procedure Read (Self : in out Context; Buffer : out Streams.Stream_Element_Array; Last : out Streams.Stream_Element_Offset);
 
