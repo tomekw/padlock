@@ -90,15 +90,27 @@ package body Padlock.Contexts is
    end Write;
 
    procedure Close (Self : in out Context) is
+      use type Thin.C_ssize_t;
+
+      C_Close_Result : Thin.C_ssize_t;
    begin
-      if Thin.TLS_Close (Self.C_Ctx) /= 0 then
-         raise TLS_Error with "Failed to close context: " &
-                              C.Strings.Value (Thin.TLS_Get_Error (Self.C_Ctx));
-      end if;
+      loop
+         C_Close_Result := Thin.TLS_Close (Self.C_Ctx);
+
+         if C_Close_Result = 0 then
+            return;
+         elsif C_Close_Result = Thin.TLS_WANT_POLLIN or else
+            C_Close_Result = Thin.TLS_WANT_POLLOUT
+         then
+            null;
+         elsif C_Close_Result < 0 then
+            raise TLS_Error with "Failed to close context: " & C.Strings.Value (Thin.TLS_Get_Error (Self.C_Ctx));
+         end if;
+      end loop;
    end Close;
 
    overriding procedure Finalize (Self : in out Context) is
-      Unused_Result : C.int;
+      Unused_Result : Thin.C_ssize_t;
    begin
       if Self.C_Ctx /= null then
          Unused_Result := Thin.TLS_Close (Self.C_Ctx);

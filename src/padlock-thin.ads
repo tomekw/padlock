@@ -67,7 +67,7 @@ package Padlock.Thin is
    function TLS_Write (Ctx : TLS_Ctx_Ptr; Buffer : System.Address; Length : C.size_t) return C_ssize_t
      with Import, Convention => C, External_Name => "tls_write";
 
-   function TLS_Close (Ctx : TLS_Ctx_Ptr) return C.int
+   function TLS_Close (Ctx : TLS_Ctx_Ptr) return C_ssize_t
      with Import, Convention => C, External_Name => "tls_close";
 
    procedure TLS_Free (Ctx : TLS_Ctx_Ptr)
