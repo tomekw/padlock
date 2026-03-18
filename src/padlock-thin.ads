@@ -43,6 +43,10 @@ package Padlock.Thin is
       (Cfg : TLS_Cfg_Ptr; Cert_File : C.Strings.chars_ptr; Key_File : C.Strings.chars_ptr) return C.int
      with Import, Convention => C, External_Name => "tls_config_set_keypair_file";
 
+   function TLS_Config_Add_Keypair_File
+      (Cfg : TLS_Cfg_Ptr; Cert_File : C.Strings.chars_ptr; Key_File : C.Strings.chars_ptr) return C.int
+     with Import, Convention => C, External_Name => "tls_config_add_keypair_file";
+
    procedure TLS_Config_Free (Cfg : TLS_Cfg_Ptr)
      with Import, Convention => C, External_Name => "tls_config_free";
 

@@ -69,6 +69,22 @@ package body Padlock.Configs is
       end return;
    end Init;
 
+   procedure Add_Keypair_File (Self : in out Config; Cert_File : String; Key_File : String) is
+      C_Cert_File : C.Strings.chars_ptr := C.Strings.New_String (Cert_File);
+      C_Key_File : C.Strings.chars_ptr := C.Strings.New_String (Key_File);
+   begin
+      if Thin.TLS_Config_Add_Keypair_File (Self.C_Cfg, C_Cert_File, C_Key_File) /= 0 then
+         C.Strings.Free (C_Cert_File);
+         C.Strings.Free (C_Key_File);
+
+         raise TLS_Error with "Failed to add keypair file: " &
+                              C.Strings.Value (Thin.TLS_Get_Config_Error (Self.C_Cfg));
+      end if;
+
+      C.Strings.Free (C_Cert_File);
+      C.Strings.Free (C_Key_File);
+   end Add_Keypair_File;
+
    function C_Cfg (Self : Config) return Thin.TLS_Cfg_Ptr is
    begin
       return Self.C_Cfg;

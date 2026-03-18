@@ -11,6 +11,8 @@ package Padlock.Configs is
 
    function Init (Cert_File : String; Key_File : String) return Config;
 
+   procedure Add_Keypair_File (Self : in out Config; Cert_File : String; Key_File : String);
+
    function C_Cfg (Self : Config) return Thin.TLS_Cfg_Ptr;
 private
 
