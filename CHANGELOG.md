@@ -1,5 +1,7 @@
 ## unreleased
 
+* Raspberry Pi support
+
 ## 0.2.0
 
 * OpenBSD support

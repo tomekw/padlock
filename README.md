@@ -6,7 +6,7 @@ LibreSSL's [libtls](https://man.openbsd.org/tls_init.3) in Ada.
 
 This is alpha software. I'm actively working it. YMMV.
 
-Tested on Linux x86_64, MacOS ARM, OpenBSD x86_64 and Windows x86_64.
+Tested on Linux x86_64 and aarch64 (Raspberry Pi), MacOS aarch64, OpenBSD x86_64 and Windows x86_64.
 
 ## Usage
 
