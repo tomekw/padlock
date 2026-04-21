@@ -1,5 +1,7 @@
 ## unreleased
 
+## 0.3.0
+
 * Raspberry Pi support
 
 ## 0.2.0
