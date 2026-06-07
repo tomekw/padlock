@@ -21,7 +21,7 @@ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes -days 
 Add:
 
 ``` toml
-padlock = "0.2.0"
+padlock = "VERSION"
 ```
 
 to your [tada.toml](https://github.com/tomekw/tada).

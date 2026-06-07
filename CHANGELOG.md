@@ -1,5 +1,7 @@
 ## unreleased
 
+* update `libtls` to `4.3.2`
+
 ## 0.3.0
 
 * Raspberry Pi support
