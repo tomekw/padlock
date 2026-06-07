@@ -1,5 +1,7 @@
 ## unreleased
 
+## 0.3.1
+
 * update `libtls` to `4.3.2`
 
 ## 0.3.0
